@@ -2,7 +2,7 @@ class RecipesController < ApplicationController
 
    def index 
       render json: Recipe.all.to_json({
-          :except => [:updated_at, :created_at, :directions]
+          :except => [:updated_at, :created_at]
       })
    end
 
