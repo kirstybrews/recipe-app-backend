@@ -20,15 +20,34 @@ class RecipesController < ApplicationController
          )
    end
 
-   
-   
+   def create
+      recipe = Recipe.new(recipe_params)
+      if recipe.save
+         render json: recipe 
+      else
+         render json: {error: 'Unable to create new recipe'}
+      end
+   end
+
+
+   def update
+      Recipe.find(params[:id]).update(recipe_params)
+      render json: Recipe.find(params[:id])
+   end
+
+  
+   def destroy
+      recipe = Recipe.find(params[:id]).destroy
+      render json: Recipe.all.to_json(recipe_serializer_options)
+   end
+
 
 
 
    private
 
    def recipe_params
-      params.require(:recipe).permit(:name, :image_url, :directions, :prep_time, :cook_time, :difficulty, :rating, :category)
+      params.require(:recipe).permit(:name, :image_url, :directions, :cook_time, :difficulty, :rating, :category)
    end
 
 
