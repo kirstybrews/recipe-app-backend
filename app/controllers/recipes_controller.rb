@@ -40,8 +40,17 @@ class RecipesController < ApplicationController
 
 
    def update
-      Recipe.find(params[:id]).update(recipe_params)
-      render json: Recipe.find(params[:id])
+      recipe = Recipe.find(params[:id])
+      recipe.update(recipe_params)
+      render json: recipe.to_json(
+         :include => {
+               :recipe_ingredients => {
+                  :include => {
+                     :ingredient => {:only => [:name]}
+                  }
+                }
+            }, :except => [:updated_at, :created_at]
+         )
    end
 
   
