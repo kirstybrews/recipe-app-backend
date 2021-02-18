@@ -1,9 +1,18 @@
 class RecipesController < ApplicationController
 
    def index 
-      render json: Recipe.all.to_json({
-          :except => [:updated_at, :created_at]
-      })
+      # render json: Recipe.all.to_json({
+      #     :except => [:updated_at, :created_at]
+      # })
+      render json: Recipe.all.to_json(
+         :include => {
+               :recipe_ingredients => {
+                  :include => {
+                     :ingredient => {:only => [:name]}
+                  }
+                }
+            }, :except => [:updated_at, :created_at]
+         )
    end
 
 
