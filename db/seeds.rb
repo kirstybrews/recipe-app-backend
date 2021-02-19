@@ -70,7 +70,6 @@ eggplant = Ingredient.create(name: 'eggplant')
 panko_breadcrumbs = Ingredient.create(name: 'panko breadcrumbs')
 ricotta_cheese = Ingredient.create(name: 'ricotta cheese')
 shredded_mozzarella = Ingredient.create(name: 'shredded mozzarella')
-artichoke_hearts = Ingredient.create(name: 'artichoke hearts')
 
 butter = Ingredient.create(name: 'butter')
 cod = Ingredient.create(name: 'cod')
