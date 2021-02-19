@@ -32,7 +32,15 @@ class RecipesController < ApplicationController
    def create
       recipe = Recipe.new(recipe_params)
       if recipe.save
-         render json: recipe 
+         render json: recipe.to_json(
+            :include => {
+                  :recipe_ingredients => {
+                     :include => {
+                        :ingredient => {:only => [:name]}
+                     }
+                   }
+               }, :except => [:updated_at, :created_at]
+            )
       else
          render json: {error: 'Unable to create new recipe'}
       end
